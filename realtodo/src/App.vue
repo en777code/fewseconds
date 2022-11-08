@@ -17,6 +17,8 @@
 import HeaderMenu from "./menu/HeaderMenu.vue"
 import SideMenu from "./menu/SideMenu.vue"
 
+
+
 export default{
   methods:{
     controlDrawer(flag){
