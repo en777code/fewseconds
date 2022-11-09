@@ -5,7 +5,9 @@ import store from './store.js'
 import vuetify from './plugins/vuetify'
 import '@mdi/font/css/materialdesignicons.css'
 
+import Fire from './firebase.js'
 
+Vue.mixin(Fire)
 Vue.config.productionTip = false
 
 new Vue({

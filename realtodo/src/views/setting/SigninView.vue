@@ -6,7 +6,7 @@
         <!--        columnはデフォではcols=1でrowのなかに横に12当分で並ぶ colsで何割を使うか設定できる
                     mdはミディアムディスプレイ(ノートなど 960~1264px)のcolで、xsはスマホ lgはラージ(1264~1904px)-->
         <v-col lg="5" md="5" xs="1" class="white rounded-xl my-15">
-          <h2>ログイン</h2><br><br>
+          <h2>サインイン</h2><br><br>
           <v-card-text>
             <v-form>
               <v-text-field v-model="email" prepend-icon="mdi-account-circle" label="Email"/>
@@ -24,8 +24,8 @@
   
               <v-row justify="center">
                 <v-col cols="12" lg="6" md="6" class="my-15">
-                  <v-btn @click.stop="logIn" :loading="loading1" class="info" dark text outlined height="50px"
-                         width="150px">ログイン
+                  <v-btn @click.stop="registerUser()" class="info" dark text outlined height="50px"
+                         width="150px">登録
                   </v-btn>
                 </v-col>
               </v-row>
@@ -35,40 +35,57 @@
       </v-row>
     </v-container>
   </template>
-  
-  <script>
-  import {signInWithEmailAndPassword} from "firebase/auth";
-  
-  export default {
-    methods: {
-      // 変数初期化
-      reset() {
-        this.email = ""
-        this.pass = ""
-      },
-      // ログイン関連
-      async logIn() {
-        await signInWithEmailAndPassword(this.auth, this.email, this.pass)
-        
-      },
+
+   
+<script>
+import {createUserWithEmailAndPassword } from "firebase/auth";
+ 
+export default {
+
+  methods: {
+    // 変数初期化
+    reset() {
+      this.email = ""
+      this.pass = ""
     },
-    data: () => ({
-      email: "",
-      pass: "",
-      showLogPassword: false,
+    // ログイン関連
+    registerUser() {
+    createUserWithEmailAndPassword(this.auth, this.email, this.pass)
+    .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user)
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode)
+    console.log(errorMessage)
+    // ..
+  });
+        
       
-  
-      path: "signup",
-  
-      snackbar: {
-        flag: false,
-        color: "",
-        msg: "",
-        timeout: 2000
-      },
-      sppOnSnapshot: null
-    }),
-  
-  
-  }
-  </script>
+      
+    },
+  },
+
+  data: () => ({
+    email: "",
+    pass: "",
+    showLogPassword: false,
+    
+
+
+    snackbar: {
+      flag: false,
+      color: "",
+      msg: "",
+      timeout: 2000
+    },
+    sppOnSnapshot: null
+  }),
+
+
+}
+</script>
