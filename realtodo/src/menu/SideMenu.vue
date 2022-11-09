@@ -23,11 +23,11 @@
                 <v-list-item-title>ログイン</v-list-item-title>
 
             </v-list-item>
-            <v-list-item link to="/setting">
+            <v-list-item @click="signOut()">
                 <v-list-item-icon>
                     <v-icon>mdi-robot-outline</v-icon>
                 </v-list-item-icon>
-                <v-list-item-title>おしらせ</v-list-item-title>
+                <v-list-item-title>サインアウト</v-list-item-title>
 
             </v-list-item>
             <v-list-item link to="/setting">
@@ -49,10 +49,18 @@
 </template>
 
 <script>
-
+import {signOut } from "firebase/auth";
 export default{
     props:["drawer"],
     methods:{
+        signOut(){
+            signOut(this.auth).then(() => {
+                // Sign-out successful.
+            }).catch((error) => {
+                console.log(error)
+                // An error happened.
+            });
+        }
 
     },
     data:()=>({

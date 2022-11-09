@@ -24,7 +24,7 @@
   
               <v-row justify="center">
                 <v-col cols="12" lg="6" md="6" class="my-15">
-                  <v-btn @click.stop="logIn" :loading="loading1" class="info" dark text outlined height="50px"
+                  <v-btn @click.stop="logIn"  class="info" dark text outlined height="50px"
                          width="150px">ログイン
                   </v-btn>
                 </v-col>
@@ -37,9 +37,24 @@
   </template>
   
   <script>
-  import {signInWithEmailAndPassword} from "firebase/auth";
+  import {signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
   
   export default {
+    mounted(){
+      onAuthStateChanged(this.auth, (user) => {
+        if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      console.log(uid)
+    
+    } else {
+      // User is signed out
+      console.log('signout')
+      
+    }
+});
+    },
     methods: {
       // 変数初期化
       reset() {
@@ -47,8 +62,8 @@
         this.pass = ""
       },
       // ログイン関連
-      async logIn() {
-        await signInWithEmailAndPassword(this.auth, this.email, this.pass)
+      logIn() {
+        signInWithEmailAndPassword(this.auth, this.email, this.pass)
         
       },
     },
