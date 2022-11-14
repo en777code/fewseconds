@@ -28,6 +28,9 @@
                          width="150px">ログイン
                   </v-btn>
                 </v-col>
+                <v-col>
+                  <v-btn text color="blue" link to='/SignIn'>アカウントをお持ちの方</v-btn>
+                </v-col>
               </v-row>
             </v-form>
           </v-card-text>
@@ -51,7 +54,6 @@
     } else {
       // User is signed out
       console.log('signout')
-      
     }
 });
     },
