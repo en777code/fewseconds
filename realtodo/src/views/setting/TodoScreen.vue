@@ -4,9 +4,9 @@
         <v-col cols="4" align="center"
               ><v-card outlined tile>大タスク</v-card>
               <v-text-field
-              
               label="大タスクを追加"
               type="text"              
+              v-model="BigTask"
               >
             <template v-slot:append-outer>
                 <v-btn text color="blue" @click="AddBigTask()">追加</v-btn>
@@ -60,8 +60,8 @@ import {
   
 
 }from "firebase/firestore"
-import {onAuthStateChanged} from "firebase/auth";
-import { ZERO } from "long";
+import {getAuth,onAuthStateChanged} from "firebase/auth";
+
 
 
 /* eslint-enable */
@@ -84,17 +84,22 @@ export default{
   
     methods: {
       async AddBigTask(){
-        const db = getFirestore()
-        const data ={
-          name:"zero"
-        }
-        await setDoc(doc(db, "cities", "new-city-id"), data);
-        
-    
+        const auth =getAuth()
+        const user = auth.currentUser
+        const data1 =
+    {
       
+      title: this.BigTask,
+     
+    }
+        // console.log(user)
+        // const data ={
+        //   title:this.BigTask
+        // }
+        // await setDoc(doc(this.db, "users", `${user.uid}`,"BigTask"), data);
+        const userBigTask = collection(this.db,'users', `${user.uid}`,'bigtask');
+        setDoc(doc(userBigTask),data1)
 },
-    data:()=>({
-    }),
         
 }}
 </script>

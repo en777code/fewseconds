@@ -11,7 +11,7 @@ const firebaseConfig = {
     appId: "1:676574448653:web:49a68a10a495b89b5f5944"
   };
 initializeApp(firebaseConfig)
-console.log(firebaseConfig)
+
 
 
 /* eslint-disable */
@@ -24,6 +24,9 @@ export default{
     data:()=>({
         auth:auth,
         db:db,
+        BigTask:"",
+        MediumTask:"",
+        SmallTask:"",
     }),
         
 }
