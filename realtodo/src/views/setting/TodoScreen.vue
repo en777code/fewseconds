@@ -4,12 +4,12 @@
         <v-col cols="4" align="center"
               ><v-card outlined tile>大タスク</v-card>
               <v-text-field
-              v-model="BigTask"
+              
               label="大タスクを追加"
               type="text"              
               >
             <template v-slot:append-outer>
-                <v-btn text color="blue">追加</v-btn>
+                <v-btn text color="blue" @click="AddBigTask()">追加</v-btn>
             </template>
             </v-text-field>
               </v-col
@@ -18,7 +18,7 @@
             <v-col cols="4" align="center"
               ><v-card outlined tile>中タスク</v-card>
               <v-text-field
-              v-model="MediumTask"
+              
               label="中タスクを追加"
               type="text"              
               >
@@ -28,11 +28,12 @@
             </v-text-field>
             </v-col
             >
+
             
             <v-col cols="4" align="center"
               ><v-card outlined tile>小タスク</v-card>
               <v-text-field
-              v-model="SmallTask"
+           
               label="小タスクを追加"
               type="text"   
               >
@@ -44,25 +45,56 @@
   </v-container>
 </template>
 <script>
-// import {
-//     getFirestore,
 
-// }from "firebase/firestore"
+3
+/* eslint-disable */
+// このエリアのソースコードでeslintが無効になる
+import {
+    addDoc,
+    collection,
+    getFirestore,
+    setDoc,
+    getDoc,
+    doc,
+    getDocs,
+  
+
+}from "firebase/firestore"
+import {onAuthStateChanged} from "firebase/auth";
+import { ZERO } from "long";
+
+
+/* eslint-enable */
 
 export default{
-    methods: {
-    AddBigData(){
-        
-
-
-      
+  mounted(){
+      onAuthStateChanged(this.auth, (user) => {
+        if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      console.log(uid)
+    
+    } else {
+      // User is signed out
+      console.log('signout')
+    }
+});
     },
+  
+    methods: {
+      async AddBigTask(){
+        const db = getFirestore()
+        const data ={
+          name:"zero"
+        }
+        await setDoc(doc(db, "cities", "new-city-id"), data);
+        
+    
+      
 },
     data:()=>({
-        BigTask:"",
-        MediumTask:"",
-        SmallTask:"",
     }),
         
-}
+}}
 </script>

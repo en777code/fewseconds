@@ -1,25 +1,29 @@
 import {initializeApp} from 'firebase/app'
 import {getAuth} from 'firebase/auth'
-import {
-    getFirestore,
+import {getFirestore} from 'firebase/firestore'
 
-}from "firebase/firestore"
+const firebaseConfig = {
+    apiKey: "AIzaSyBSq0N-OlvjRGN_xGCXV4uSsWY_LMJFdPE",
+    authDomain: "realtodo-bf1ff.firebaseapp.com",
+    projectId: "realtodo-bf1ff",
+    storageBucket: "realtodo-bf1ff.appspot.com",
+    messagingSenderId: "676574448653",
+    appId: "1:676574448653:web:49a68a10a495b89b5f5944"
+  };
+initializeApp(firebaseConfig)
+console.log(firebaseConfig)
 
-const app =initializeApp({
-    apiKey: process.env.VUE_APP_apiKey,
-    authDomain:process.env.VUE_APP_authDomain,
-    projectId: process.env.VUE_APP_projectId,
-    storageBucket: process.env.VUE_APP_storageBucket,
-    messagingSenderId:process.env.VUE_APP_meddagingSenderId,
-    appId:process.env.VUE_APP_appId,
-    })
 
-const auth = getAuth(app)
+/* eslint-disable */
+// このエリアのソースコードでeslintが無効になる
 
+const db = getFirestore()
+/* eslint-enable */
+const auth= getAuth()
 export default{
     data:()=>({
         auth:auth,
-        db:getFirestore(),
+        db:db,
     }),
         
 }
