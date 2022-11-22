@@ -13,14 +13,31 @@ const firebaseConfig = {
 initializeApp(firebaseConfig)
 
 
+// import {
+//     addDoc,
+//     collection,
+//     getFirestore,
+//     setDoc,
+//     getDoc,
+//     doc,
+//     getDocs,
+//     onSnapshot,
+
+// }from "firebase/firestore"
+// import {getAuth,onAuthStateChanged} from "firebase/auth";
+
+
 
 /* eslint-disable */
 // このエリアのソースコードでeslintが無効になる
+
 
 const db = getFirestore()
 /* eslint-enable */
 const auth= getAuth()
 export default{
+    
+    
     data:()=>({
         auth:auth,
         db:db,
