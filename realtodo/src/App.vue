@@ -71,6 +71,7 @@ export default{
       user:null,
       unsub:null,
       e6:1,
+      e7:1,
   
   })
 }

@@ -1,177 +1,39 @@
 <template>
+  <v-app>
     <v-container class="grey lighten-5">
-    <v-row no-gutters>
-              <!-- <v-col cols="4" align="center">
-                <v-card outlined tile>大タスク</v-card>
-                <v-text-field
-                label="大タスクを追加"
-                type="text"              
-                v-model="BigTask"
-                >
-              <template v-slot:append-outer>
-                  <v-btn text color="blue" @click="AddBigTask()">追加</v-btn>
-
-              </template>
-              
-              </v-text-field>
-
-                <template>
-                  <div>
-                    
-                  </div>
-                </template>
-              </v-col>
-            
-            <v-col cols="4" align="center"
-              ><v-card outlined tile>中タスク</v-card>
-              <v-text-field
-              
-              label="中タスクを追加"
-              type="text"              
-              >
-            <template v-slot:append-outer>
-                <v-btn text color="blue">追加</v-btn>
-            </template>
-            </v-text-field>
-            </v-col
-            >
-
-            
-            <v-col cols="4" align="center"
-              ><v-card outlined tile>小タスク</v-card>
-              <v-text-field
-           
-              label="小タスクを追加"
-              type="text"   
-              >
-            <template v-slot:append-outer>
-                <v-btn text color="blue">追加</v-btn>
-            </template>
-            </v-text-field></v-col> -->
-            
-            <v-row>
-              <v-btn @click="AddBigTask">OBJ</v-btn>
-              <v-stepper
-              v-model="e6"
-              vertical
-              >
-              <v-stepper-step
-              :complete="e6 > 1"
-              step="1"
-                >
-              Select an app
-              <small>Summarize if needed</small>
-              </v-stepper-step>
-
-              <v-stepper-content step="1">
-                <v-card
-                  color="grey lighten-1"
-                  class="mb-12"
-                  height="200px"
-                ></v-card>
-                <v-btn
-                  color="primary"
-                  @click="e6 = 2"
-                >
-                  Continue
-                </v-btn>
-          
-              </v-stepper-content>
-
-              <v-stepper-step
-                :complete="e6 > 2"
-                step="2"
-              >
-                Configure analytics for this app
-              </v-stepper-step>
-
-              <v-stepper-content step="2">
-                <v-card
-                  color="grey lighten-1"
-                  class="mb-12"
-                  height="200px"
-                ></v-card>
-                <v-btn
-                  color="primary"
-                  @click="e6 = 3"
-                >
-                  Continue
-                </v-btn>
+    
+            <v-stepper v-for="(title,index) in this.BigTask" :key ="index.id">
+              <h3>{{title.title}}</h3> 
+              <v-stepper v-for="(mini,ind) in title.tasks" :key="(ind)"
+                v-model="e6"
+                vertical>
                 
-              </v-stepper-content>
-
-              <v-stepper-step
-                :complete="e6 > 3"
-                step="3"
-              >
-                Select an ad format and name ad unit
-              </v-stepper-step>
-
-              <v-stepper-content step="3">
-                <v-card
+                  <v-stepper-step
+                  :complete ="e6>ind+1"
+                  :step=ind+1
+                  >
+                  {{mini}}
+                  <small>あいうえお</small>
+                  {{ind}}
+                  </v-stepper-step>
+                <v-stepper-content :step =ind+1>
+                  <v-card
                   color="grey lighten-1"
                   class="mb-12"
                   height="200px"
                 ></v-card>
                 <v-btn
                   color="primary"
-                  @click="e6 = 4"
+                  @click="e6 = e6 +1"
                 >
                   Continue
                 </v-btn>
-              </v-stepper-content>
-
-              <v-stepper-step step="4">
-                View setup instructions
-              </v-stepper-step>
-              <v-stepper-content step="4">
-                <v-card
-                  color="grey lighten-1"
-                  class="mb-12"
-                  height="200px"
-                ></v-card>
-                <v-btn
-                  color="primary"
-                  @click="e6 = 1"
-                >
-                  Continue
-                </v-btn>
-                
-              </v-stepper-content>
+                </v-stepper-content>
+                </v-stepper>
             </v-stepper>
-              
-            </v-row>
-            <v-row>
-              <div>
-             
-                <v-card v-for="(task,key) in this.BigTask" :key="key">
-                  <v-col>
-                    {{key}}
-                  </v-col>
-                  <v-col>
-                    {{task.title}}
-                  </v-col>
-                  <v-col>
-                    {{task.tasks}}
-                  </v-col>
-                  <li v-for="(mini,num) in task.tasks" :key ="mini" >
-                    {{mini}}
-                    {{num}}
-                  </li>
-                  
-                </v-card>
-              
-            </div>
-            </v-row>
-           
-     
-        
-            
-          
-            
   
-    </v-row>
   </v-container>
+  </v-app>
 </template>
 <script>
 
