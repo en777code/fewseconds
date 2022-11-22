@@ -70,6 +70,7 @@ export default{
       dataRef:null,
       user:null,
       unsub:null,
+      e6:1,
   
   })
 }

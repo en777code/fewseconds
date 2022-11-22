@@ -44,6 +44,7 @@ export default{
         BigTask:"",
         MediumTask:"",
         SmallTask:"",
+        e6:1,
     }),
         
 }
