@@ -45,6 +45,11 @@ export default{
         MediumTask:"",
         SmallTask:"",
         e6:1,
+        active : false, // 実行状態
+        start : 0, // startを押した時刻
+        timer : 0, // setInterval()の格納用
+        interval : 0, // 計測時間
+        accum : 0, // 累積時間(stopしたとき用)
     }),
         
 }

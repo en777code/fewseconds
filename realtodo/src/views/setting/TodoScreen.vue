@@ -1,36 +1,53 @@
 <template>
   <v-app>
-    <v-container class="grey lighten-5">
+    <v-container>
     
-            <v-stepper v-for="(title,index) in this.BigTask" :key ="index.id">
-              <h3>{{title.title}}</h3> 
+            <v-stepper v-for="(title,index) in this.BigTask" 
+            :key ="index.id"
+            color="#rgba(255,0,0)"
+            >
+              <h1>{{title.title}}</h1> 
               <v-stepper v-for="(mini,ind) in title.tasks" :key="(ind)"
                 v-model="e6"
-                vertical>
+                vertical
+                >
                 
                   <v-stepper-step
+                  
                   :complete ="e6>ind+1"
                   :step=ind+1
                   >
-                  {{mini}}
-                  <small>あいうえお</small>
-                  {{ind}}
+                  
+                  <h2>{{mini}}</h2>
+                 
                   </v-stepper-step>
-                <v-stepper-content :step =ind+1>
+                <v-stepper-content :step =ind+1
+                >
+                
                   <v-card
-                  color="grey lighten-1"
-                  class="mb-12"
-                  height="200px"
-                ></v-card>
+                  color="teal accent-3"
+                  class="mb-12">
+                  <div>
+                    <h2>経過時間</h2>
+                    <h1>{{time}}</h1>
+                    <!-- 小数2桁まで表示 -->
+                    <!-- <v-btn @click="startTimer()" v-show="!active">Start</v-btn>
+                    <v-btn @click="stopTimer()" v-show="active">Stop</v-btn> -->
+                    <!-- <v-btn @click="resetTimer()">Reset</v-btn> -->
+                  </div>
+               
+                  </v-card>
                 <v-btn
                   color="primary"
-                  @click="e6 = e6 +1"
+                  @click="e6 = e6 +1,resetTimer()"
+
                 >
-                  Continue
+                  Finish
                 </v-btn>
                 </v-stepper-content>
                 </v-stepper>
             </v-stepper>
+            
   
   </v-container>
   </v-app>
@@ -61,6 +78,7 @@ import {getAuth,onAuthStateChanged} from "firebase/auth";
 
 export default{
   mounted(){
+      
       onAuthStateChanged(this.auth, (user) => {
         if (user) {
         const uid = user.uid;
@@ -87,24 +105,35 @@ export default{
       console.log('signout')
     }
 });
+},  created(){
+  this.startTimer()
 },
+    computed:{
+      time(){
+        return +Math.floor(this.interval%3600/60) +":"+this.interval.toFixed(1)%3600%60
+      }
+        
+    },
   
     methods: {
+      startTimer(){
+            this.active = true;
+            this.start = Date.now();
+            this.timer = setInterval(()=>{ this.interval = this.accum + (Date.now() - this.start) * 0.001;}, 10); // 10msごとに現在時刻とstartを押した時刻の差を足す
+         },
+        stopTimer(){
+            this.active = false;
+            this.accum = this.interval;
+            clearInterval(this.timer);
+        },
+        resetTimer(){
+            this.interval = 0;
+            this.accum = 0;
+            this.start = Date.now();
+        },
       async AddBigTask(){
-        console.log(this.BigTask["1d1ANAXPKFq34re2kKPL"])
-    //     const auth =getAuth()
-    //     const user = auth.currentUser
-    //     const data1 =
-    // {
-    //   title: this.BigTask,
-    // }
-    //     console.log(user)
-    //     const data ={
-    //       title:this.BigTask
-    //     }
-    //     await setDoc(doc(this.db, "users", `${user.uid}`,"BigTask"), data);
-    //     const userBigTask = collection(this.db,'users', `${user.uid}`,'bigtask');
-    //     setDoc(doc(userBigTask),data1)
+        console.log(this.BigTask["1d1ANAXPKFq34re2kKPL"])     
+},
 },
 
     data: () => ({
@@ -112,9 +141,12 @@ export default{
         SmallTask:"",
         Ref:null,
         usersCollectionRef:null,
+
+        
+
        
   }),
     
         
-}}
+}
 </script>
