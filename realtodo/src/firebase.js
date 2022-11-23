@@ -36,8 +36,6 @@ const db = getFirestore()
 /* eslint-enable */
 const auth= getAuth()
 export default{
-    
-    
     data:()=>({
         auth:auth,
         db:db,
@@ -50,6 +48,5 @@ export default{
         timer : 0, // setInterval()の格納用
         interval : 0, // 計測時間
         accum : 0, // 累積時間(stopしたとき用)
-    }),
-        
+    }),      
 }

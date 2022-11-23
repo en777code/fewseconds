@@ -5,7 +5,7 @@
             <v-stepper v-for="(title,index) in this.BigTask" 
             :key ="index.id"
             color="#rgba(255,0,0)"
-            >
+            >{{index}}
               <h1>{{title.title}}</h1> 
               <v-stepper v-for="(mini,ind) in title.tasks" :key="(ind)"
                 v-model="e6"
@@ -38,14 +38,20 @@
                
                   </v-card>
                 <v-btn
+                v-if="ind!==title.tasks.length-1"
                   color="primary"
                   @click="e6 = e6 +1,resetTimer()"
 
                 >
                   Finish
                 </v-btn>
+                <v-btn v-if="ind==title.tasks.length-1"
+                color="primary"
+                @click="e6 = e6 +1,doneTask(index),startTimer(),resetTimer()">Done</v-btn>
+                
                 </v-stepper-content>
                 </v-stepper>
+                
             </v-stepper>
             
   
@@ -110,7 +116,7 @@ export default{
 },
     computed:{
       time(){
-        return +Math.floor(this.interval%3600/60) +":"+this.interval.toFixed(1)%3600%60
+        return +Math.floor(this.interval%3600/60) +":"+this.interval.toFixed(0)%3600%60
       }
         
     },
@@ -134,6 +140,9 @@ export default{
       async AddBigTask(){
         console.log(this.BigTask["1d1ANAXPKFq34re2kKPL"])     
 },
+        async doneTask(index){
+          console.log(index)
+        },
 },
 
     data: () => ({
