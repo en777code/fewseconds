@@ -1,6 +1,16 @@
 <template>
   <v-app>
     <v-container>
+        <v-card
+        color="teal accent-3"
+        class="mb-12">
+        <div v-for="(title,index) in this.BigTask"
+        :key ="index.id">
+        <p @click="consoleData(index)">{{title.title}}</p>
+        
+        </div>
+        
+        </v-card>
     
             <v-stepper v-for="(title,index) in this.BigTask" 
             :key ="index.id"
@@ -136,6 +146,10 @@ export default{
             this.interval = 0;
             this.accum = 0;
             this.start = Date.now();
+        },
+        consoleData(index){
+          console.log(index)
+
         },
       async AddBigTask(){
         console.log(this.BigTask["1d1ANAXPKFq34re2kKPL"])     
