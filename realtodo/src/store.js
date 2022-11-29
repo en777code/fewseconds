@@ -5,6 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state:{
-        count:2
+        viewIndex:null,
+        viewData:null,
+        forData:null,
     }
 })

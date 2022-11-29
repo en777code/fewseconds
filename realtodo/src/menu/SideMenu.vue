@@ -56,7 +56,7 @@
                 <v-list-item-icon>
                     <v-icon>mdi-robot-outline</v-icon>
                 </v-list-item-icon>
-                <v-list-item-title>新規作成画面</v-list-item-title>
+                <v-list-item-title>タスク消費画面</v-list-item-title>
 
             </v-list-item>
 

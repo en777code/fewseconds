@@ -2,9 +2,10 @@
     <div>
     <h1>新規作成画面</h1>
     <v-btn @click="addTask">新規作成</v-btn>
+    <v-text-field v-model="title" label="タイトル"></v-text-field>
     <div v-for="(item,index) in testArray" :key='index'>
-        <v-text-field v-model='testArray[index].title' />
-        <v-text-field v-model='testArray[index].ex' />
+        <v-text-field v-model='testArray[index].title' label="行動名" />
+        <v-text-field v-model='testArray[index].ex' label="説明"/>
         <v-btn @click="console">console</v-btn>
         
     </div>
@@ -35,7 +36,8 @@ import {getAuth,onAuthStateChanged} from "firebase/auth";
 /* eslint-enable */
 export default{
     data:()=>({
-        testArray:[{"title":"unko","ex":"unchi"}]
+        testArray:[{"title":"","ex":""}],
+        title:"",
     }),
     methods:{
     console(){
@@ -63,7 +65,8 @@ export default{
     },
     async addTask(){
         const data ={
-            title : "task",
+            donecount:0,
+            title : this.title,
             array:this.testArray,
 
         }
