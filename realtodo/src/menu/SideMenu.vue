@@ -45,6 +45,20 @@
                 <v-list-item-title>おしらせ</v-list-item-title>
 
             </v-list-item>
+            <v-list-item link to="/Create">
+                <v-list-item-icon>
+                    <v-icon>mdi-robot-outline</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>作成画面</v-list-item-title>
+
+            </v-list-item>
+            <v-list-item link to="/DoTask">
+                <v-list-item-icon>
+                    <v-icon>mdi-robot-outline</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>新規作成画面</v-list-item-title>
+
+            </v-list-item>
 
         </v-list>
     </v-navigation-drawer>
