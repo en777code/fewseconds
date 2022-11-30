@@ -5,6 +5,7 @@
         
         <div v-for="(title,index) in this.ViewTask" :key="index.id">
             <h1 @click="setTask(index)">{{title.title}}</h1>
+            <p>{{title.donecount}}</p>
             
         </div>
 
@@ -83,9 +84,9 @@ export default{
             const docRef =doc(this.db,'users',uid,'bigtask',taskid)
             const docSnap =await getDoc(docRef)
             if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data());
                 this.$store.state.viewData = docSnap.data()
                 this.$store.state.forData = docSnap.data().array
+                this.$store.state.updateRef = docRef
 
             } else {
                 // doc.data() will be undefined in this case

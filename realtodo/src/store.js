@@ -8,5 +8,6 @@ export default new Vuex.Store({
         viewIndex:null,
         viewData:null,
         forData:null,
+        updateRef:null,
     }
 })
