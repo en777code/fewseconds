@@ -51,6 +51,7 @@ export default{
     } else {
       // User is signed out
       console.log('signout')
+      this.$router.push('/Login')
       
     }
 });

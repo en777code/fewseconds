@@ -108,11 +108,8 @@ export default{
 
         },
 
-      async AddBigTask(){
-        console.log(this.BigTask["1d1ANAXPKFq34re2kKPL"])     
-},
         async doneTask(index){
-          console.log(updateDoc,index)
+         
           const number = index +1
           const data ={
             donecount:number

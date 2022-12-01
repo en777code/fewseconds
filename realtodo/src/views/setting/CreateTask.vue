@@ -1,12 +1,13 @@
 <template>
     <div>
+    <v-btn @click="goTodo">実行画面</v-btn>
     <h1>新規作成画面</h1>
     <v-btn @click="addTask">新規作成</v-btn>
     <v-text-field v-model="title" label="タイトル"></v-text-field>
     <div v-for="(item,index) in testArray" :key='index'>
         <v-text-field v-model='testArray[index].title' label="行動名" />
         <v-text-field v-model='testArray[index].ex' label="説明"/>
-        <v-btn @click="console">console</v-btn>
+       
         
     </div>
     <v-btn @click="addArray">add</v-btn>
@@ -40,9 +41,7 @@ export default{
         title:"",
     }),
     methods:{
-    console(){
-      console.log(this.testArray)
-    },
+   
     addArray(){
         const obj = {"title":"","ex":""}
         this.testArray.push(obj)
@@ -78,6 +77,9 @@ export default{
         const userBigTask = collection(this.db,'users', `${uid}`,'bigtask');
         setDoc(doc(userBigTask),data)
         // await setDoc(doc(this.db, "users", `${uid}`,"bigtask"), data);
+    },
+    goTodo(){
+        this.$router.push('/TodoScreen')
     }
   },
 }

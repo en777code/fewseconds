@@ -1,11 +1,16 @@
 <template>
     <v-app>
+        <v-btn @click="goCreate()">新規作成</v-btn>
         <h1>タスク選択画面</h1>
         <p>{{count}}</p>
         
-        <div v-for="(title,index) in this.ViewTask" :key="index.id">
-            <h1 @click="setTask(index)">{{title.title}}</h1>
-            <p>{{title.donecount}}</p>
+        <div v-for="(doc,index) in this.ViewTask" :key="index.id">
+            <v-row>
+                <v-col> <h1 @click="setTask(index)">{{doc.title}}</h1></v-col>
+                <v-col><v-btn @click="deleteTask(index)">削除</v-btn></v-col>
+            </v-row>
+           
+            <p>{{doc.donecount}}</p>
             
         </div>
 
@@ -23,6 +28,7 @@ import {
     setDoc,
     getDoc,
     doc,
+    deleteDoc,
     getDocs,
     onSnapshot,
     query,
@@ -39,7 +45,8 @@ export default{
     computed:{
         count(){
             return this.$store.state.viewIndex
-        }
+        },
+
     },
     mounted(){
         onAuthStateChanged(this.auth,(user)=>{
@@ -72,9 +79,15 @@ export default{
     }),
 
     methods:{
-        console(index){
-            console.log(index)
-            
+        
+        async deleteTask(index){
+            const auth =getAuth()
+            const uid = auth.currentUser.uid
+            const taskid = index
+            const docRef =doc(this.db,'users',uid,'bigtask',taskid)
+            await deleteDoc(docRef)
+            this.$router.go({path: this.$router.currentRoute.path, force: true})
+
 
         },
         async setTask(index){
@@ -89,11 +102,14 @@ export default{
                 this.$store.state.updateRef = docRef
 
             } else {
-                // doc.data() will be undefined in this case
+               
                 console.log("No such document!");
           }
             this.$router.push('/TodoScreen')
             
+        },
+        goCreate(){
+            this.$router.push('/Create')
         },
 
     }

@@ -40,9 +40,34 @@
   </template>
   
   <script>
+  /* eslint-disable */
+// このエリアのソースコードでeslintが無効になる
+import {
+    addDoc,
+    collection,
+    getFirestore,
+    setDoc,
+    getDoc,
+    doc,
+    getDocs,
+    onSnapshot,
+
+}from "firebase/firestore"
+import {getAuth,onAuthStateChanged} from "firebase/auth";
+
+
+
+/* eslint-enable */
   import {signInWithEmailAndPassword} from "firebase/auth";
   
   export default {
+    mounted(){
+      onAuthStateChanged(this.auth, (user) => {
+        if (user) {
+          this.$router.push('/TodoScreen').catch()
+        } 
+});
+  },
     
     
     methods: {
@@ -54,6 +79,8 @@
       // ログイン関連
       logIn() {
         signInWithEmailAndPassword(this.auth, this.email, this.pass)
+      
+        
         
       },
     },
