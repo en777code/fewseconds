@@ -1,19 +1,38 @@
 <template>
     <v-app>
-        <v-btn @click="goCreate()">新規作成</v-btn>
-        <h1>タスク選択画面</h1>
-        <p>{{count}}</p>
+        <v-container>
+       
+        <v-row>
+            <v-col cols="10"> <v-card-title>SELECT TASK</v-card-title></v-col>
+            <v-col cols="2"><v-btn color="info" @click="goCreate()" >CREATE</v-btn></v-col>
+        </v-row>
+        
+       
+        <v-spacer></v-spacer>
         
         <div v-for="(doc,index) in this.ViewTask" :key="index.id">
             <v-row>
-                <v-col> <h1 @click="setTask(index)">{{doc.title}}</h1></v-col>
-                <v-col><v-btn @click="deleteTask(index)">削除</v-btn></v-col>
+                <v-col cols="8">
+                    <v-row>
+                        <v-col cols="1"><v-card-title color="grey lighten-3">{{doc.donecount}}</v-card-title></v-col>
+                        <v-col cols="7"><v-card-title>{{doc.title}}</v-card-title></v-col>
+                    </v-row> 
+                    
+                    
+                </v-col>
+                <v-col cols="4">
+                    <v-row >
+                        <v-col ><v-btn color="green" @click="setTask(index)">START</v-btn></v-col>
+                        <v-col><v-btn color="red" @click="deleteTask(index)">DELETE</v-btn></v-col>
+                    </v-row>
+                </v-col>
+                
             </v-row>
            
-            <p>{{doc.donecount}}</p>
+           
             
         </div>
-
+    </v-container>
     </v-app>
     
 </template>
@@ -101,10 +120,7 @@ export default{
                 this.$store.state.forData = docSnap.data().array
                 this.$store.state.updateRef = docRef
 
-            } else {
-               
-                console.log("No such document!");
-          }
+            } 
             this.$router.push('/TodoScreen')
             
         },

@@ -1,12 +1,17 @@
 <template>
     <v-container>
+      <div>
+        <v-snackbar v-model="snackbar.flag" :timeout="snackbar.timeout" light top right outlined :color="snackbar.color">
+          {{snackbar.msg}}
+        </v-snackbar>
+      </div>
       <v-row justify="center">
         <!--        justifyでボックスをセンターに-->
         <v-col cols="1" class="my-15"/>
         <!--        columnはデフォではcols=1でrowのなかに横に12当分で並ぶ colsで何割を使うか設定できる
                     mdはミディアムディスプレイ(ノートなど 960~1264px)のcolで、xsはスマホ lgはラージ(1264~1904px)-->
         <v-col lg="5" md="5" xs="1" class="white rounded-xl my-15">
-          <h2>サインイン</h2><br><br>
+          <h2>SignIn</h2><br><br>
           <v-card-text>
             <v-form>
               <v-text-field v-model="email" prepend-icon="mdi-account-circle" label="Email"/>
@@ -25,7 +30,7 @@
               <v-row justify="center">
                 <v-col cols="12" lg="6" md="6" class="my-15">
                   <v-btn @click.stop="registerUser()" class="info" dark text outlined height="50px"
-                         width="150px">登録
+                         width="150px">Register
                   </v-btn>
                 </v-col>
               </v-row>
@@ -51,17 +56,16 @@ export default {
     // ログイン関連
     registerUser() {
     createUserWithEmailAndPassword(this.auth, this.email, this.pass)
-    .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user)
-    // ...
+    .then(() => {
+     
   })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode)
-    console.log(errorMessage)
+  .catch(() => {
+    this.snackbar ={
+      flag:true,
+      color:"red",
+      msg:"サインインに失敗しました",
+      timeout:2000,
+    }
     // ..
   });
         
@@ -76,13 +80,12 @@ export default {
     showLogPassword: false,
     
 
-
-    snackbar: {
-      flag: false,
-      color: "",
-      msg: "",
-      timeout: 2000
-    },
+    snackbar:false,
+    flag:false,
+    valid:false,
+    color:"",
+    msg:"",
+    timeout:2000,
     sppOnSnapshot: null
   }),
 

@@ -1,8 +1,8 @@
 <template>
-    <v-app-bar app color="green" flat dark clipped-left>
+    <v-app-bar app color="orange" flat dark clipped-left>
         <v-app-bar-nav-icon v-on:click.stop="controlDrawerChild()"/>
         <v-toolbar-title >
-            <span style="font-weight:bold; font-size:1.4em">Small</span>
+            <span style="font-weight:bold; font-size:1.4em">IPPO</span>
         </v-toolbar-title>
     </v-app-bar>
 </template>

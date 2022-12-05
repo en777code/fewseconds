@@ -1,18 +1,27 @@
 <template>
+    <v-app>
+        <v-container>
     <div>
-    <v-btn @click="goTodo">実行画面</v-btn>
-    <h1>新規作成画面</h1>
-    <v-btn @click="addTask">新規作成</v-btn>
-    <v-text-field v-model="title" label="タイトル"></v-text-field>
+        <v-snackbar v-model="snackbar.flag" :timeout="snackbar.timeout" light top right outlined :color="snackbar.color">
+          {{snackbar.msg}}
+        </v-snackbar>
+    
+    <v-card-title>CREATE TASK</v-card-title>
+    <v-btn  color="info" @click="addTask">CREATE</v-btn>
+    <v-text-field v-model="title" label="TASK_NAME"></v-text-field>
     <div v-for="(item,index) in testArray" :key='index'>
-        <v-text-field v-model='testArray[index].title' label="行動名" />
-        <v-text-field v-model='testArray[index].ex' label="説明"/>
+        <p>{{("STEP"+(index+1))}}</p>
+        <v-text-field v-model='testArray[index].title' label="STEP_TITLE" />
+        <v-text-field v-model='testArray[index].ex' label="EXPLAIN"/>
+        
        
         
     </div>
-    <v-btn @click="addArray">add</v-btn>
+    <v-btn color="info" @click="addArray">ADD ATEP</v-btn>
     </div>
-</template>>
+</v-container>
+</v-app>
+</template>
 
 <script>
 /* eslint-disable */
@@ -39,6 +48,12 @@ export default{
     data:()=>({
         testArray:[{"title":"","ex":""}],
         title:"",
+        snackbar:false,
+        flag:false,
+        valid:false,
+        color:"",
+        msg:"",
+        timeout:2000,
     }),
     methods:{
    
@@ -62,7 +77,30 @@ export default{
     //     const userBigTask = collection(this.db,'users', `${user.uid}`,'bigtask');
     //     setDoc(doc(userBigTask),data1)
     },
+    taskvalidation(){
+        if(this.title == ""){
+            return true
+        }
+        for(const  i of this.testArray){
+            if(i.title ==""){
+                return true
+                
+            }
+        }
+    },
     async addTask(){
+        if(this.taskvalidation()){
+            this.snackbar ={
+                flag:true,
+                color:"red",
+                msg:"タイトル、項目名を埋めてください",
+                timeout:2000,
+                }
+            console.log("STOP")
+            return
+        }
+      
+
         const data ={
             donecount:0,
             title : this.title,
@@ -77,9 +115,10 @@ export default{
         const userBigTask = collection(this.db,'users', `${uid}`,'bigtask');
         setDoc(doc(userBigTask),data)
         // await setDoc(doc(this.db, "users", `${uid}`,"bigtask"), data);
+        this.goSelect()
     },
-    goTodo(){
-        this.$router.push('/TodoScreen')
+    goSelect(){
+        this.$router.push('/')
     }
   },
 }

@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <v-row v-if="viewdata">
+    <v-container>
+    <!-- <v-row v-if="viewdata">
       <v-col>
         <h1>{{viewdata.title}}</h1>
       </v-col>
@@ -8,7 +9,8 @@
         <h1>{{viewdata.donecount}}</h1>
       </v-col>
 
-    </v-row>
+    </v-row> -->
+    
     <v-stepper v-model="slide" flat vertical>
     <template v-for="(method, index) in fordata">
       
@@ -23,15 +25,15 @@
       </v-stepper-step>
 
       <v-stepper-content :step="index + 1" :key="method.name">
-        <h1>{{method.title}}</h1>
-        <v-card elevation="5" class="ma-3 scrollY" height="100%">
+        <v-card-title>{{method.title}}</v-card-title>
+        <v-card elevation="5" class="ma-3 scrollY" >
           <v-col>
-            <v-row class="pa-5">
+            <v-row>
               
               <v-col>
-                <p class="text-justify">
+                <v-card-title class="text-justify">
                   {{ method.ex }}
-                </p>
+                </v-card-title>
               </v-col>
             </v-row>
           </v-col>
@@ -43,11 +45,11 @@
                     @click="slide=slide+1"
   
                   >
-                    Finish
+                    NEXT
                   </v-btn>
                   <v-btn v-if="index==fordata.length-1"
                   color="primary"
-                  @click="(slide=slide+1,doneTask(viewdata.donecount))">Done</v-btn>
+                  @click="(slide=slide+1,doneTask(viewdata.donecount))">DONE</v-btn>
           </v-row>
         </v-card>
       </v-stepper-content>
@@ -56,7 +58,7 @@
      
             
   
- 
+</v-container>
   </v-app>
 </template>
 <script>
@@ -87,7 +89,7 @@ import {getAuth,onAuthStateChanged} from "firebase/auth";
 export default{
   created : function(){
     if(this.viewdata==null){
-      this.$router.push('/DoTask')
+      this.$router.push('/')
     }
   },
   computed:{
@@ -115,7 +117,7 @@ export default{
             donecount:number
           }
           await  updateDoc(this.updatefirebase,data)
-          this.$router.push('/DoTask')
+          this.$router.push('/')
 
         },
 },

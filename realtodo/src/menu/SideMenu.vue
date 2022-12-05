@@ -3,7 +3,7 @@
         <v-list nav dense>
             <v-list-item link to="/">
             <v-list-item-icon>
-                <v-icon large color ="orange">mdi-account-cirle</v-icon>
+                <v-icon large color ="black">mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-title>HOME</v-list-item-title>
             </v-list-item>
@@ -16,49 +16,31 @@
                 <v-list-item-title>サインイン</v-list-item-title>
 
             </v-list-item> -->
+            <v-list-item link to="/Create">
+                <v-list-item-icon>
+                    <v-icon>mdi-playlist-plus</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Create Task</v-list-item-title>
+
+            </v-list-item>
             <v-list-item link to="/Login">
                 <v-list-item-icon>
-                    <v-icon>mdi-robot-outline</v-icon>
+                    <v-icon color="info">mdi-login-variant</v-icon>
                 </v-list-item-icon>
-                <v-list-item-title>ログイン</v-list-item-title>
+                <v-list-item-title>LogIn</v-list-item-title>
 
             </v-list-item>
             <v-list-item @click="signOut()">
                 <v-list-item-icon>
-                    <v-icon>mdi-robot-outline</v-icon>
+                    <v-icon color="red">mdi-logout-variant</v-icon>
                 </v-list-item-icon>
-                <v-list-item-title>サインアウト</v-list-item-title>
+                <v-list-item-title>SignOut</v-list-item-title>
                 
 
             </v-list-item>
-            <v-list-item link to="/TodoScreen">
-                <v-list-item-icon>
-                    <v-icon>mdi-robot-outline</v-icon>
-                </v-list-item-icon>
-                <v-list-item-title>TODO画面</v-list-item-title>
-
-            </v-list-item>
-            <v-list-item link to="/setting">
-                <v-list-item-icon>
-                    <v-icon>mdi-robot-outline</v-icon>
-                </v-list-item-icon>
-                <v-list-item-title>おしらせ</v-list-item-title>
-
-            </v-list-item>
-            <v-list-item link to="/Create">
-                <v-list-item-icon>
-                    <v-icon>mdi-robot-outline</v-icon>
-                </v-list-item-icon>
-                <v-list-item-title>作成画面</v-list-item-title>
-
-            </v-list-item>
-            <v-list-item link to="/DoTask">
-                <v-list-item-icon>
-                    <v-icon>mdi-robot-outline</v-icon>
-                </v-list-item-icon>
-                <v-list-item-title>タスク消費画面</v-list-item-title>
-
-            </v-list-item>
+            
+           
+          
 
         </v-list>
     </v-navigation-drawer>
