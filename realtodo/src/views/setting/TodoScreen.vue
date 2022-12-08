@@ -105,10 +105,6 @@ export default{
   },
     methods: {
       
-        consoleData(){
-         
-
-        },
 
         async doneTask(index){
          

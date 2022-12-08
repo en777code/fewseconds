@@ -56,7 +56,7 @@ export default{
                 // Sign-out successful.
             }).catch((error) => {
                 console.log(error)
-                // An error happened.
+             
             });
         }
 

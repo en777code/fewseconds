@@ -44,7 +44,8 @@ const router = new Router({
     {path:'/Create',component:CreateTask,
     meta:{requireAuth:true}},
     {path:'/',component:DoTask,
-    meta:{requireAuth:true}}
+    meta: { title: '', desc: '' ,requireAuth:true},
+    }
 
 ],
     

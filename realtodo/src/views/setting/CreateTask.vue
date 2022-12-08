@@ -96,7 +96,7 @@ export default{
                 msg:"タイトル、項目名を埋めてください",
                 timeout:2000,
                 }
-            console.log("STOP")
+            
             return
         }
       
@@ -109,7 +109,7 @@ export default{
         }
         const auth =getAuth()
         const uid = auth.currentUser.uid
-        console.log("uid",uid)
+        
         // const cityRef = doc(this.db, 'cities', 'BJ');
         // setDoc(cityRef,data);
         const userBigTask = collection(this.db,'users', `${uid}`,'bigtask');
