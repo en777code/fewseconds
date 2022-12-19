@@ -33,6 +33,7 @@ import { async } from '@firebase/util'
 Vue.use(Router);
 
 const router = new Router({
+    mode:"history",
     routes:[
     {path:'/Users',component:Users},
     {path:'/Login',component:Login,
